@@ -15,7 +15,7 @@ export default function UserInfoModal({
 }) {
   const closeArea = useRef(null);
   const closeModal = (e: React.MouseEvent) => {
-    if (e.target == closeArea?.current) {
+    if (e.target === closeArea?.current) {
       toggle(false);
     }
   };

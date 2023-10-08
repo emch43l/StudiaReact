@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { User } from "../types/userType";
 import { getUsers } from "../requests/userRequest";
+import { Link } from "react-router-dom";
 import UserInfoButton from "./userInfoButton";
 
 export default function UsersTable() {
@@ -26,20 +27,26 @@ export default function UsersTable() {
         </thead>
         <tbody>
           {users
-            ? users.map((user,index) => (
+            ? users.map((user, index) => (
                 <tr key={index}>
                   <td>{user.id.toString()}</td>
                   <td>{user.username}</td>
                   <td>{user.email}</td>
                   <td>
                     <div className="join">
-                        <UserInfoButton user={user} />
-                        <button className="btn btn-xs btn-active btn-neutral join-item">
-                            <i className="fas fa-images"></i>
-                        </button>
-                        <button className="btn btn-xs btn-active btn-ghost join-item">
-                            <i className="fas fa-comment-alt"></i>
-                        </button>
+                      <UserInfoButton user={user} />
+                      <Link
+                        to={`user/${user.id}/albums`}
+                        className="btn btn-xs btn-active btn-neutral join-item"
+                      >
+                        <i className="fas fa-images"></i>
+                      </Link>
+                      <Link
+                        to={`user/${user.id}/posts`}
+                        className="btn btn-xs btn-active btn-ghost join-item"
+                      >
+                        <i className="fas fa-comment-alt"></i>
+                      </Link>
                     </div>
                   </td>
                 </tr>
