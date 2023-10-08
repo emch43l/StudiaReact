@@ -2,6 +2,7 @@ import { User } from "../types/userType";
 import { createPortal } from "react-dom";
 import { useRef } from "react";
 import UserAddressMap from "./userAddressMap";
+import UserInfoModalRowChunk from "./chunks/userInfoModalRowChunk";
 
 export default function UserInfoModal({
   user,
@@ -14,7 +15,7 @@ export default function UserInfoModal({
 }) {
   const closeArea = useRef(null);
   const closeModal = (e: React.MouseEvent) => {
-    if (e.target == closeArea.current) {
+    if (e.target == closeArea?.current) {
       toggle(false);
     }
   };
@@ -41,39 +42,18 @@ export default function UserInfoModal({
                 <div className="mb-1">
                   <h1 className="text-sm font-semibold">Basic information</h1>
                 </div>
-                <div>
-                  <span className="text-xs pr-3">Name:</span>
-                  <span className="text-sm">{user.name}</span>
-                </div>
-                <div>
-                  <span className="text-xs pr-3">Username:</span>
-                  <span className="text-sm">{user.username}</span>
-                </div>
-                <div>
-                  <span className="text-xs pr-3">Email:</span>
-                  <span className="text-sm">{user.email}</span>
-                </div>
+                <UserInfoModalRowChunk val1={"Name:"} val2={user.name}/>
+                <UserInfoModalRowChunk val1={"Username:"} val2={user.username}/>
+                <UserInfoModalRowChunk val1={"Email:"} val2={user.email}/>
               </div>
               <div className="my-3">
                 <div className="mb-1">
                   <h1 className="text-sm font-semibold">Address</h1>
                 </div>
-                <div>
-                  <span className="text-xs pr-3">Street:</span>
-                  <span className="text-sm">{user.address.street}</span>
-                </div>
-                <div>
-                  <span className="text-xs pr-3">Suite:</span>
-                  <span className="text-sm">{user.address.suite}</span>
-                </div>
-                <div>
-                  <span className="text-xs pr-3">City:</span>
-                  <span className="text-sm">{user.address.city}</span>
-                </div>
-                <div>
-                  <span className="text-xs pr-3">Zip Code:</span>
-                  <span className="text-sm">{user.address.zipcode}</span>
-                </div>
+                <UserInfoModalRowChunk val1={"Street:"} val2={user.address.street}/>
+                <UserInfoModalRowChunk val1={"Suite:"} val2={user.address.suite}/>
+                <UserInfoModalRowChunk val1={"City:"} val2={user.address.city}/>
+                <UserInfoModalRowChunk val1={"Zip Code:"} val2={user.address.zipcode}/>
                 <div>
                   <UserAddressMap lat={user.address.geo.lat} lng={user.address.geo.lng}/>
                 </div>
@@ -82,18 +62,9 @@ export default function UserInfoModal({
                 <div className="mb-1">
                   <h1 className="text-sm font-semibold">Company</h1>
                 </div>
-                <div>
-                  <span className="text-xs pr-3">Name:</span>
-                  <span className="text-sm">{user.company.name}</span>
-                </div>
-                <div>
-                  <span className="text-xs pr-3">Catch Phrase:</span>
-                  <span className="text-sm">{user.company.catchPhrase}</span>
-                </div>
-                <div>
-                  <span className="text-xs pr-3">Bs:</span>
-                  <span className="text-sm">{user.company.bs}</span>
-                </div>
+                <UserInfoModalRowChunk val1={"Name:"} val2={user.company.name}/>
+                <UserInfoModalRowChunk val1={"Catch Phrase:"} val2={user.company.catchPhrase}/>
+                <UserInfoModalRowChunk val1={"Bs:"} val2={user.company.bs}/>
               </div>
             </div>
           </div>
