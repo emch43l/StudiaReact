@@ -5,32 +5,13 @@ import { Post } from "./types/postType";
 import { Photo } from "./types/photoType";
 import PhotoGallery from "./components/photoGallery";
 import './index.css';
+import Mian from "./pages/main";
 
 function App() {
-  const [data, setData] = useState<Photo[] | null>();
-  const [isLoading, setLoading] = useState(false);
-
-  useEffect(() => {
-    (async () => {
-      try {
-        setLoading(true);
-        const posts = await getPhotos();
-        setLoading(false);
-        setData(posts);
-      } catch {
-        setLoading(false);
-        console.error("Error while fetching data !");
-      }
-    })();
-  }, []);
 
   return (
-    <div>
-      {isLoading ? (
-        <div>Loading data...</div>
-      ) : data ? (
-        <PhotoGallery photos={data} />
-      ) : null}
+    <div className="relative h-100 w-100">
+     <Mian/>
     </div>
   );
 }
