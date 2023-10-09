@@ -1,4 +1,4 @@
-export default function UserInfoModalRowChunk({
+export default function UserInfoModalRow({
   val1,
   val2,
 }: {

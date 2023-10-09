@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { User } from "../types/userType";
 import { getUsers } from "../requests/userRequest";
 import { Link } from "react-router-dom";
-import UserInfoButton from "./userInfoButton";
+import UserInfoButton from "./buttons/userInfoButton";
 
 export default function UsersTable() {
   const [users, setUsers] = useState<User[] | null>(null);

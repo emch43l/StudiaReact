@@ -2,6 +2,14 @@ import axios from "axios";
 import config from "../config.json";
 import { Photo } from "../types/photoType";
 
+export async function getAlbumPhotos(albumId: number) {
+  return await axios
+    .get<Photo[]>(
+      config.SERVER_URL + `photos?albumId=${albumId}`
+    )
+    .then((response) => response.data);
+}
+
 export async function getPhotos(startIndex: number = 0, limit: number = 10) {
   return await axios
     .get<Photo[]>(
