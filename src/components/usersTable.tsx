@@ -1,18 +1,11 @@
-import { useEffect, useState } from "react";
-import { User } from "../types/userType";
-import { getUsers } from "../requests/userRequest";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import UserInfoButton from "./buttons/userInfoButton";
+import { UserContext } from "../contexts/userContext";
 
 export default function UsersTable() {
-  const [users, setUsers] = useState<User[] | null>(null);
 
-  useEffect(() => {
-    (async () => {
-      const data = await getUsers();
-      setUsers(data);
-    })();
-  }, []);
+  const users = useContext(UserContext);
 
   return (
     <div className="overflow-x-auto">

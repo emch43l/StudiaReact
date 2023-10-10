@@ -1,13 +1,22 @@
 import { useEffect, useState } from "react";
 import { Comment } from "../../types/commentType";
-import { getPostComments } from "../../requests/commentRequest";
+import { addPostComment, getPostComments } from "../../requests/commentRequest";
 import ModalHeader from "../chunks/modalHeader";
+import { ErrorBoundary } from 'react-error-boundary';
+import CommentForm from "../forms/commentForm";
 
 export default function CommentsModal({ postId }: { postId: number }) {
   const [comments, setComments] = useState<Comment[] | null>(null);
+  const [loading, toggleLoading] = useState(true);
+
+  const addComment = (comment: Comment) => {
+    addPostComment(comment);
+  }
+
   useEffect(() => {
     (async () => {
       const data = await getPostComments(postId);
+      toggleLoading(false);
       setComments(data);
     })();
   }, []);
@@ -15,26 +24,42 @@ export default function CommentsModal({ postId }: { postId: number }) {
   return (
     <div>
       <ModalHeader text={"Comments"} />
-      <div className="pt-2">
-        {comments
-          ? comments.map((comment, index) => (
-              <div className="my-4 leading-3 max-w-[500px]">
+      <div>
+        <CommentForm addComment={addComment}/>
+      </div>
+      <div>
+        {loading ? (
+          <div className="text-center mb-2">
+            <div>
+              <div>
+                <span className="loading loading-dots loading-md"></span>
+              </div>
+              <div>
+                <span className="font-bold text-sm">Loading comments...</span>
+              </div>
+            </div>
+          </div>
+        ) : comments ? (
+          comments.map((comment, index) => (
+            <div key={index} className="my-4 leading-3 max-w-[500px]">
+              <div>
+                <div className="leading-3">
+                  <span className="text-xs opacity-70">{comment.email}</span>
+                </div>
                 <div>
-                  <div className="leading-3">
-                    <span className="text-xs opacity-70">{comment.email}</span>
-                  </div>
-                  <div>
-                    <span className="font-bold text-sm mr-2">
-                      {comment.name}
-                    </span>
-                  </div>
-                  <div>
-                    <span className="text-xs">{comment.body}</span>
-                  </div>
+                  <span className="font-bold text-sm mr-2">{comment.name}</span>
+                </div>
+                <div>
+                  <span className="text-xs">{comment.body}</span>
                 </div>
               </div>
-            ))
-          : null}
+            </div>
+          ))
+        ) : (
+          <div>
+            <span>An error occurred.</span>
+          </div>
+        )}
       </div>
     </div>
   );
