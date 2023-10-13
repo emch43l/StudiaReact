@@ -12,3 +12,10 @@ export type AddCommentType = {
   body: string;
   email: string;
 };
+
+export type EditCommentType = {
+  id: number;
+  name: string;
+  body: string;
+  email: string;
+}

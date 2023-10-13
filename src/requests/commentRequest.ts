@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Comment } from "../types/commentType";
+import { AddCommentType, Comment, EditCommentType } from "../types/commentType";
 import config from "../config.json";
 
 export async function getPostComments(postId: number) {
@@ -8,7 +8,7 @@ export async function getPostComments(postId: number) {
     .then((response) => response.data);
 }
 
-export async function addPostComment(comment: Comment) {
+export async function addPostComment(comment: AddCommentType) {
   return await axios
     .post<Comment>(config.SERVER_URL + `comments`, comment, {
       headers: {
@@ -16,4 +16,19 @@ export async function addPostComment(comment: Comment) {
       },
     })
     .then((response) => response.data);
+}
+
+export async function editPostComment(comment: EditCommentType) {
+  return await axios
+    .put<Comment>(config.SERVER_URL + `comments/${comment.id}`, comment, {
+      headers: {
+        "Content-Type": "application/json; charset=utf8",
+      },
+    })
+    .then((response) => response.data);
+}
+
+export async function deletePostComment(commentId: number) {
+  return await axios
+    .delete<Comment>(config.SERVER_URL + `comments/${commentId}`)
 }

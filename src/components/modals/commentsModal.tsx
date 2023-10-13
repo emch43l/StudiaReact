@@ -1,15 +1,56 @@
 import { useEffect, useState } from "react";
-import { Comment } from "../../types/commentType";
-import { addPostComment, getPostComments } from "../../requests/commentRequest";
+import {
+  AddCommentType,
+  Comment,
+  EditCommentType,
+} from "../../types/commentType";
+import {
+  addPostComment,
+  editPostComment,
+  getPostComments,
+} from "../../requests/commentRequest";
 import CommentForm from "../forms/commentForm";
 import ModalHeader from "./modalHeader";
+import CommentRow from "../commentRow";
+import { CommentFormModeEnum } from "../../enums/commentFormModeEnum";
 
 export default function CommentsModal({ postId }: { postId: number }) {
   const [comments, setComments] = useState<Comment[] | null>(null);
   const [loading, toggleLoading] = useState(true);
+  const [formMode, switchFormMode] = useState(CommentFormModeEnum.ADD);
+  const [currentComment, setCurrentComment] = useState<Comment | null>(null);
 
-  const addComment = (comment: Comment) => {
-    addPostComment(comment);
+  const changeFormMode = (
+    comment: Comment | null,
+    formMode: CommentFormModeEnum
+  ) => {
+    setCurrentComment(comment);
+    switchFormMode(formMode);
+  };
+
+  const addComment = (comment: AddCommentType) => {
+    return addPostComment(comment).then((cmnt) => {
+      setComments([cmnt, ...(comments ?? [])]);
+    });
+  };
+
+  const deleteComment = (commentId: number) => {
+    setComments(comments?.filter((comment) => comment.id !== commentId)  ?? [])
+  }
+
+  const editComment = (comment: EditCommentType) => {
+    return editPostComment(comment).then((cmnt) => {
+      setComments(
+        comments?.map((c) => {
+          if (c.id == cmnt.id) {
+            c.body = cmnt.body;
+            c.email = cmnt.email;
+            c.name = cmnt.name;
+          }
+          return c;
+        }) ?? []
+      );
+    });
   };
 
   useEffect(() => {
@@ -24,7 +65,14 @@ export default function CommentsModal({ postId }: { postId: number }) {
     <div>
       <ModalHeader text={"Comments"} />
       <div>
-        <CommentForm addComment={addComment} />
+        <CommentForm
+          changeFormMode={changeFormMode}
+          comment={currentComment}
+          editComment={editComment}
+          addComment={addComment}
+          postId={postId}
+          formMode={formMode}
+        />
       </div>
       <div>
         {loading ? (
@@ -40,19 +88,12 @@ export default function CommentsModal({ postId }: { postId: number }) {
           </div>
         ) : comments ? (
           comments.map((comment, index) => (
-            <div key={index} className="my-4 leading-3 max-w-[500px]">
-              <div>
-                <div className="leading-3">
-                  <span className="text-xs opacity-70">{comment.email}</span>
-                </div>
-                <div>
-                  <span className="font-bold text-sm mr-2">{comment.name}</span>
-                </div>
-                <div>
-                  <span className="text-xs">{comment.body}</span>
-                </div>
-              </div>
-            </div>
+            <CommentRow
+              comment={comment}
+              key={index}
+              deleteComment={deleteComment}
+              changeFormMode={changeFormMode}
+            />
           ))
         ) : (
           <div>
