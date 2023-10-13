@@ -9,11 +9,13 @@ export async function getUsers() {
 }
 
 export async function createUser(user: User) {
-  return await axios.post<User>(config.SERVER_URL + 'users', user, {
-    headers: {
-      "Content-Type": "application/json; charset=utf-8"
-    }
-  }).then((response) => response.data)
+  return await axios
+    .post<User>(config.SERVER_URL + "users", user, {
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+      },
+    })
+    .then((response) => response.data);
 }
 
 export async function updateUser(user: User) {
@@ -27,6 +29,5 @@ export async function updateUser(user: User) {
 }
 
 export async function deleteUser(userId: number) {
-  return await axios
-    .delete(config.SERVER_URL + `users/${userId}`)
+  return await axios.delete(config.SERVER_URL + `users/${userId}`);
 }

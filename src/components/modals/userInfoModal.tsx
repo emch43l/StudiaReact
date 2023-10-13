@@ -3,12 +3,12 @@ import { createPortal } from "react-dom";
 import { useRef } from "react";
 import UserAddressMap from "../userAddressMap";
 import UserInfoModalRowChunk from "../chunks/userInfoModalRow";
-import ModalHeader from "../chunks/modalHeader";
+import ModalHeader from "./modalHeader";
 
 export default function UserInfoModal({ user }: { user: User }) {
   return (
     <div>
-      <ModalHeader text={"About"}/>
+      <ModalHeader text={"About"} />
       <div>
         <div className="my-3">
           <div className="mb-1">

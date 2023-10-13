@@ -4,9 +4,7 @@ import { Photo } from "../types/photoType";
 
 export async function getAlbumPhotos(albumId: number) {
   return await axios
-    .get<Photo[]>(
-      config.SERVER_URL + `photos?albumId=${albumId}`
-    )
+    .get<Photo[]>(config.SERVER_URL + `photos?albumId=${albumId}`)
     .then((response) => response.data);
 }
 

@@ -33,7 +33,7 @@ export default function AlbumsTable() {
                   <td>{album.id.toString()}</td>
                   <td>{album.title}</td>
                   <td>
-                    <AlbumImagesButton albumId={album.id}/>
+                    <AlbumImagesButton albumId={album.id} />
                   </td>
                 </tr>
               ))

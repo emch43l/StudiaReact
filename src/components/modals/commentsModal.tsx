@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { Comment } from "../../types/commentType";
 import { addPostComment, getPostComments } from "../../requests/commentRequest";
-import ModalHeader from "../chunks/modalHeader";
-import { ErrorBoundary } from 'react-error-boundary';
 import CommentForm from "../forms/commentForm";
+import ModalHeader from "./modalHeader";
 
 export default function CommentsModal({ postId }: { postId: number }) {
   const [comments, setComments] = useState<Comment[] | null>(null);
@@ -11,7 +10,7 @@ export default function CommentsModal({ postId }: { postId: number }) {
 
   const addComment = (comment: Comment) => {
     addPostComment(comment);
-  }
+  };
 
   useEffect(() => {
     (async () => {
@@ -25,7 +24,7 @@ export default function CommentsModal({ postId }: { postId: number }) {
     <div>
       <ModalHeader text={"Comments"} />
       <div>
-        <CommentForm addComment={addComment}/>
+        <CommentForm addComment={addComment} />
       </div>
       <div>
         {loading ? (

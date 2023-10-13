@@ -17,8 +17,8 @@ export default function CommentForm({ addComment }: { addComment: Function }) {
       postId: postId,
       name: title,
       body: description,
-      email: userEmail
-    }
+      email: userEmail,
+    };
 
     console.log(comment);
   };
@@ -37,7 +37,9 @@ export default function CommentForm({ addComment }: { addComment: Function }) {
             </option>
             {users
               ? users.map((user, index) => (
-                  <option key={index} value={user.email}>{user.name}</option>
+                  <option key={index} value={user.email}>
+                    {user.name}
+                  </option>
                 ))
               : null}
           </select>
@@ -47,7 +49,7 @@ export default function CommentForm({ addComment }: { addComment: Function }) {
                 className="input w-full input-sm input-bordered join-item"
                 placeholder="Type comment title here..."
                 value={title}
-                onChange={e => setTitle(e.currentTarget.value)}
+                onChange={(e) => setTitle(e.currentTarget.value)}
               />
             </div>
           </div>
@@ -58,7 +60,7 @@ export default function CommentForm({ addComment }: { addComment: Function }) {
           className="textarea w-full textarea-bordered"
           placeholder="Type your comment here..."
           value={description}
-          onChange={e => setDescription(e.currentTarget.value)}
+          onChange={(e) => setDescription(e.currentTarget.value)}
         ></textarea>
       </div>
       <div className="mt-2 flex justify-end">

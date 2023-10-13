@@ -7,9 +7,7 @@ export default function AlbumPill({ album }: { album: Album }) {
         <span className="font-bold text-sm text-center">{album.title}</span>
       </div>
       <div className="w-full">
-        <button className="btn btn-sm">
-            View images
-        </button>
+        <button className="btn btn-sm">View images</button>
       </div>
     </div>
   );

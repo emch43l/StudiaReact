@@ -4,7 +4,6 @@ import UserInfoButton from "./buttons/userInfoButton";
 import { UserContext } from "../contexts/userContext";
 
 export default function UsersTable() {
-
   const users = useContext(UserContext);
 
   return (

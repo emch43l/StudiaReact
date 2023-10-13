@@ -9,9 +9,11 @@ export async function getPostComments(postId: number) {
 }
 
 export async function addPostComment(comment: Comment) {
-  return await axios.post<Comment>(config.SERVER_URL + `comments`, comment, {
-    headers: {
-      "Content-Type": "application/json; charset=utf8",
-    },
-  }).then((response) => response.data);
+  return await axios
+    .post<Comment>(config.SERVER_URL + `comments`, comment, {
+      headers: {
+        "Content-Type": "application/json; charset=utf8",
+      },
+    })
+    .then((response) => response.data);
 }

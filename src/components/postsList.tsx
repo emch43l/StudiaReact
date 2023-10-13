@@ -29,7 +29,7 @@ export default function PostsList() {
             <div>
               <div className="flex justify-between items-center">
                 <div className="text-sm font-bold">{post.title}</div>
-                <PostCommentsButton postId={post.id}/>
+                <PostCommentsButton postId={post.id} />
               </div>
               <div className="text-xs">{post.body}</div>
             </div>
