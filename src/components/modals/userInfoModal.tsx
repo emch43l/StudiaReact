@@ -2,7 +2,7 @@ import { User } from "../../types/userType";
 import { createPortal } from "react-dom";
 import { useRef } from "react";
 import UserAddressMap from "../userAddressMap";
-import UserInfoModalRowChunk from "../chunks/userInfoModalRow";
+import UserInfoModalRowChunk from "./userInfoModalRow";
 import ModalHeader from "./modalHeader";
 
 export default function UserInfoModal({ user }: { user: User }) {

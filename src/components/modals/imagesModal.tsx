@@ -17,7 +17,7 @@ export default function ImagesModal({ albumId }: { albumId: number }) {
     <div>
       <ModalHeader text={"Images"} />
       <div>
-        <div className="grid grid-cols-5 max-h-[80vh] overflow-y-auto overscroll-contain overflow-x-hidden">
+        <div className="grid grid-cols-3 sm:grid-cols-5 max-h-[80vh] overflow-y-auto overscroll-contain overflow-x-hidden">
           {images
             ? images.map((image, index) => (
                 <ImageTile key={index} image={image} />

@@ -8,11 +8,11 @@ export default function UsersTable() {
 
   return (
     <div className="overflow-x-auto">
-      <table className="table table-zebra">
+      <table className="table table-zebra text-xs sm:text-sm">
         <thead>
           <tr>
             <th>Id</th>
-            <th>Username</th>
+            <th className="hidden sm:block">Username</th>
             <th>Email</th>
             <th>Actions</th>
           </tr>
@@ -22,7 +22,7 @@ export default function UsersTable() {
             ? users.map((user, index) => (
                 <tr key={index}>
                   <td>{user.id.toString()}</td>
-                  <td>{user.username}</td>
+                  <td className="hidden sm:block">{user.username}</td>
                   <td>{user.email}</td>
                   <td>
                     <div className="join">
