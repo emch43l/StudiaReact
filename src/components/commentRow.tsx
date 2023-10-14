@@ -11,7 +11,7 @@ export default function CommentRow({
   deleteComment: Function;
 }) {
   return (
-    <div className="my-4 leading-3 max-w-[500px]">
+    <div className="my-4 leading-3 sm:max-w-[500px]">
       <div>
         <div className="flex justify-between items-center">
           <div>

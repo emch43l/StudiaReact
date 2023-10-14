@@ -74,7 +74,7 @@ export default function CommentsModal({ postId }: { postId: number }) {
           formMode={formMode}
         />
       </div>
-      <div className="overflow-y-auto mt-2 h-[calc(100vh-250px)] overflow-hidden">
+      <div className="overflow-y-auto mt-2 sm:max-h-[80vh] sm:h-auto h-[calc(100vh-250px)] overflow-hidden">
         {loading ? (
           <div className="text-center mb-2">
             <div>

@@ -24,7 +24,7 @@ export default function ModalBody({
         ref={closeArea}
         className="z-10 fixed inset-0 flex justify-center items-center sm:pt-8 bg-black/30"
       >
-        <div className="bg-slate-50 p-3 rounded-xl relative w-[95%] max-h-[95%] sm:w-fit  overflow-hidden">
+        <div className="bg-slate-50 p-3 rounded-xl relative w-[95%] max-h-[95%] sm:w-fit overflow-hidden">
           <div className="absolute right-3 top-3 text-lg">
             <button className="btn btn-sm" onClick={() => toggle(false)}>
               <i className="fas fa-times"></i>
