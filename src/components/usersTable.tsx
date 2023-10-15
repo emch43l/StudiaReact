@@ -39,6 +39,12 @@ export default function UsersTable() {
                       >
                         <i className="fas fa-comment-alt"></i>
                       </Link>
+                      <Link
+                        to={`user/${user.id}/todos`}
+                        className="btn btn-xs btn-active btn-ghost join-item"
+                      >
+                        <i className="fas fa-check"></i>
+                      </Link>
                     </div>
                   </td>
                 </tr>

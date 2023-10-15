@@ -7,6 +7,9 @@ import AlbumPage from "./pages/albumPage";
 import PostPage from "./pages/postPage";
 import { User } from "./types/userType";
 import { UserContext } from "./contexts/userContext";
+import { USERID_PARAM_NAME } from "./components/hooks/useUserId";
+import TodoPage from "./pages/todoPage";
+
 
 function App() {
   const [users, setUsers] = useState<User[] | null>(null);
@@ -23,10 +26,12 @@ function App() {
       <div className="relative h-full w-full">
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="user/:userId">
+          <Route path={`user/:${USERID_PARAM_NAME}`}>
             <Route path="albums" element={<AlbumPage />} />
             <Route path="posts" element={<PostPage />} />
+            <Route path="todos" element={<TodoPage/>} />
           </Route>
+          <Route path="/error" element={"An error occured !"} />
         </Routes>
       </div>
     </UserContext.Provider>

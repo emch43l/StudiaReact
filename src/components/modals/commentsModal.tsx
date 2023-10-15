@@ -6,6 +6,7 @@ import {
 } from "../../types/commentType";
 import {
   addPostComment,
+  deletePostComment,
   editPostComment,
   getPostComments,
 } from "../../requests/commentRequest";
@@ -21,24 +22,29 @@ export default function CommentsModal({ postId }: { postId: number }) {
   const [currentComment, setCurrentComment] = useState<Comment | null>(null);
 
   const changeFormMode = (
-    comment: Comment | null,
-    formMode: CommentFormModeEnum
+    formMode: CommentFormModeEnum,
+    comment: Comment | null = null
   ) => {
     setCurrentComment(comment);
     switchFormMode(formMode);
   };
 
-  const addComment = (comment: AddCommentType) => {
+  const addComment = (comment: Comment) => {
     return addPostComment(comment).then((cmnt) => {
       setComments([cmnt, ...(comments ?? [])]);
     });
   };
 
   const deleteComment = (commentId: number) => {
-    setComments(comments?.filter((comment) => comment.id !== commentId)  ?? [])
-  }
+    if (currentComment?.id == commentId)
+      changeFormMode(CommentFormModeEnum.ADD);
+    
+    return deletePostComment(commentId).finally(() =>
+      setComments(comments?.filter((comment) => comment.id !== commentId) ?? [])
+    );
+  };
 
-  const editComment = (comment: EditCommentType) => {
+  const editComment = (comment: Comment) => {
     return editPostComment(comment).then((cmnt) => {
       setComments(
         comments?.map((c) => {

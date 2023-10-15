@@ -8,9 +8,16 @@ export async function getPostComments(postId: number) {
     .then((response) => response.data);
 }
 
-export async function addPostComment(comment: AddCommentType) {
+export async function addPostComment(comment: Comment) {
+  const payload = {
+    postId: comment.postId,
+    name: comment.name,
+    body: comment.body,
+    email: comment.email,
+  };
+
   return await axios
-    .post<Comment>(config.SERVER_URL + `comments`, comment, {
+    .post<Comment>(config.SERVER_URL + `comments`, payload, {
       headers: {
         "Content-Type": "application/json; charset=utf8",
       },
@@ -18,17 +25,18 @@ export async function addPostComment(comment: AddCommentType) {
     .then((response) => response.data);
 }
 
-export async function editPostComment(comment: EditCommentType) {
+export async function editPostComment(comment: Comment) {
+  
   return await axios
     .put<Comment>(config.SERVER_URL + `comments/${comment.id}`, comment, {
       headers: {
         "Content-Type": "application/json; charset=utf8",
       },
-    })
-    .then((response) => response.data);
+    }).then((response) => response.data);
 }
 
 export async function deletePostComment(commentId: number) {
-  return await axios
-    .delete<Comment>(config.SERVER_URL + `comments/${commentId}`)
+  return await axios.delete<Comment>(
+    config.SERVER_URL + `comments/${commentId}`
+  );
 }

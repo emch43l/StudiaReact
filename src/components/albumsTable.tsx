@@ -3,15 +3,15 @@ import { useParams } from "react-router-dom";
 import { getUserAlbums } from "../requests/albumRequest";
 import { Album } from "../types/albumType";
 import AlbumImagesButton from "./buttons/albumImagesButton";
+import useUserId from "./hooks/useUserId";
 
 export default function AlbumsTable() {
   const [albums, setAlbums] = useState<Album[] | null>(null);
-  const { userId } = useParams<{ userId: string }>();
+  const userId = useUserId();
 
   useEffect(() => {
     (async () => {
-      const id = parseInt(userId === undefined ? "0" : userId);
-      const data = await getUserAlbums(id);
+      const data = await getUserAlbums(userId);
       setAlbums(data);
     })();
   }, []);

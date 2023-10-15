@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { CommentFormModeEnum } from "../enums/commentFormModeEnum";
 import { Comment } from "../types/commentType";
 
@@ -10,6 +11,13 @@ export default function CommentRow({
   changeFormMode: Function;
   deleteComment: Function;
 }) {
+  const [isDeleting, toggleDeleting] = useState(false);
+
+  const handleCommentDeletion = () => {
+    toggleDeleting(true);
+    deleteComment(comment.id).finally(() => toggleDeleting(false));
+  };
+
   return (
     <div className="my-4 leading-3 sm:max-w-[500px]">
       <div>
@@ -26,17 +34,21 @@ export default function CommentRow({
             <div className="flex">
               <button
                 onClick={() =>
-                  changeFormMode(comment, CommentFormModeEnum.EDIT)
+                  changeFormMode(CommentFormModeEnum.EDIT, comment)
                 }
                 className="btn btn-xs mr-1"
               >
                 <i className="fas fa-pen"></i>
               </button>
               <button
-                onClick={() => deleteComment(comment.id)}
+                onClick={handleCommentDeletion}
                 className="btn btn-xs btn-error"
               >
-                <i className="fas fa-trash"></i>
+                {isDeleting ? (
+                  <span className="loading loading-spinner loading-xs"></span>
+                ) : (
+                  <i className="fas fa-trash"></i>
+                )}
               </button>
             </div>
           </div>
