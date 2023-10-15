@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { getUserTodos, toggleUserTodo } from "../requests/todoRequest";
 import { Todo } from "../types/todoType";
 import { useState, useEffect } from "react";
-import useUserId from "./hooks/useUserId";
+import useUserId from "../hooks/useUserId";
 import UserTodoCompleteButton from "./buttons/userTodoCompleteButton";
 
 export default function TodosTable() {

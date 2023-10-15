@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import { Post } from "../types/postType";
 import { getUserPosts } from "../requests/postRequest";
-import { useParams } from "react-router-dom";
 import PostCommentsButton from "./buttons/postCommentsButton";
-import useUserId from "./hooks/useUserId";
+import useUserId from "../hooks/useUserId";
 
 export default function PostsList() {
   const [posts, setPosts] = useState<Post[] | null>(null);

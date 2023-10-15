@@ -7,7 +7,7 @@ import AlbumPage from "./pages/albumPage";
 import PostPage from "./pages/postPage";
 import { User } from "./types/userType";
 import { UserContext } from "./contexts/userContext";
-import { USERID_PARAM_NAME } from "./components/hooks/useUserId";
+import { USERID_PARAM_NAME } from "./hooks/useUserId";
 import TodoPage from "./pages/todoPage";
 import { ToastContainer } from "react-toastify";
 
