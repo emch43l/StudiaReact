@@ -4,6 +4,7 @@ import { AddCommentType, EditCommentType } from "../../types/commentType";
 import { CommentFormModeEnum } from "../../enums/commentFormModeEnum";
 import { Comment } from "../../types/commentType";
 import { AddCommentFormType } from "../../types/forms/formTypes";
+import { toast } from "react-toastify";
 
 type CommentFormProps = {
   comment: Comment | null;
@@ -67,7 +68,11 @@ export default function CommentForm({
         addComment(payload).finally(() => toggleSending(false));
         break;
       case CommentFormModeEnum.EDIT:
-        editComment(payload).finally(() => toggleSending(false));
+        editComment(payload).catch(() => {
+          toast.error("An error occured !", {
+            position: toast.POSITION.BOTTOM_CENTER
+          });
+        }).finally(() => toggleSending(false));
         break;
     }
   };

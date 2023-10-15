@@ -9,6 +9,7 @@ import { User } from "./types/userType";
 import { UserContext } from "./contexts/userContext";
 import { USERID_PARAM_NAME } from "./components/hooks/useUserId";
 import TodoPage from "./pages/todoPage";
+import { ToastContainer } from "react-toastify";
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
           <Route path="/error" element={"An error occured !"} />
         </Routes>
       </div>
+      <ToastContainer/>
     </UserContext.Provider>
   );
 }
