@@ -32,7 +32,7 @@ export default function CommentsModal({ postId }: { postId: number }) {
   const addComment = (comment: Comment) => {
     return addPostComment(comment).then((cmnt) => {
       setComments(prevState => {
-        return [...prevState ?? [], cmnt]
+        return [cmnt, ...prevState ?? []]
       })
     });
   };
