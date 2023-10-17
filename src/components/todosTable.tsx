@@ -8,7 +8,7 @@ import UserTodoCompleteButton from "./buttons/userTodoCompleteButton";
 export default function TodosTable() {
   const userId = useUserId();
   const [todos, setTodos] = useState<Todo[] | null>(null);
-  
+
   useEffect(() => {
     (async () => {
       const data = await getUserTodos(userId);
@@ -19,12 +19,13 @@ export default function TodosTable() {
   const toggleToto = (todoId: number, isCompleted: boolean) => {
     return toggleUserTodo(todoId, isCompleted).then((todo) => {
       setTodos(
-        todos?.map((td) => {
-          if (td.id === todoId) {
-            td.completed = todo.completed;
-          }
-          return td;
-        }) ?? []
+        (prevState) =>
+          prevState?.map((td) => {
+            if (td.id === todoId) {
+              td.completed = todo.completed;
+            }
+            return td;
+          }) ?? []
       );
     });
   };

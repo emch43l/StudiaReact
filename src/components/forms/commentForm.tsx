@@ -44,9 +44,8 @@ export default function CommentForm({
       HTMLSelectElement | HTMLInputElement | HTMLTextAreaElement
     >
   ) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
+    setFormData((prevState) => {
+      return { ...prevState, [e.target.name]: e.target.value };
     });
   };
 
@@ -68,11 +67,13 @@ export default function CommentForm({
         addComment(payload).finally(() => toggleSending(false));
         break;
       case CommentFormModeEnum.EDIT:
-        editComment(payload).catch(() => {
-          toast.error("An error occured !", {
-            position: toast.POSITION.BOTTOM_CENTER
-          });
-        }).finally(() => toggleSending(false));
+        editComment(payload)
+          .catch(() => {
+            toast.error("An error occured !", {
+              position: toast.POSITION.BOTTOM_CENTER,
+            });
+          })
+          .finally(() => toggleSending(false));
         break;
     }
   };

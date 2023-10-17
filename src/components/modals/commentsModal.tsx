@@ -31,7 +31,9 @@ export default function CommentsModal({ postId }: { postId: number }) {
 
   const addComment = (comment: Comment) => {
     return addPostComment(comment).then((cmnt) => {
-      setComments([cmnt, ...(comments ?? [])]);
+      setComments(prevState => {
+        return [...prevState ?? [], cmnt]
+      })
     });
   };
 
@@ -40,22 +42,26 @@ export default function CommentsModal({ postId }: { postId: number }) {
       changeFormMode(CommentFormModeEnum.ADD);
     
     return deletePostComment(commentId).finally(() =>
-      setComments(comments?.filter((comment) => comment.id !== commentId) ?? [])
+      setComments(prevState => {
+        return prevState?.filter((comment) => comment.id !== commentId) ?? [];
+      })
     );
   };
 
   const editComment = (comment: Comment) => {
     return editPostComment(comment).then((cmnt) => {
-      setComments(
-        comments?.map((c) => {
-          if (c.id == cmnt.id) {
-            c.body = cmnt.body;
-            c.email = cmnt.email;
-            c.name = cmnt.name;
-          }
-          return c;
-        }) ?? []
-      );
+      setComments(prevState => {
+        return (
+          prevState?.map((c) => {
+            if (c.id == cmnt.id) {
+              c.body = cmnt.body;
+              c.email = cmnt.email;
+              c.name = cmnt.name;
+            }
+            return c;
+          }) ?? []
+        );
+      });
     });
   };
 
